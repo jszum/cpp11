@@ -2,11 +2,11 @@
 #include <thread>
 
 
-void thread_function()
+void thread_function(int nr)
 {
     for(int i = 0; i < 10; i++)
     {
-        std::cout<<"Printing from thread "<<i<<std::endl;
+        std::cout<<"Printing from thread "<<nr<<std::endl;
     }
 
     std::cout<<"Done"<<std::endl;
@@ -20,9 +20,8 @@ int main() {
 
     for(int i = 0; i < num_threads; i++)
     {
-        t[i] = std::thread(thread_function);
+        t[i] = std::thread(thread_function, i);
     }
-
 
     for(int i = 0; i < num_threads; i++)
     {
