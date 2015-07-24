@@ -9,7 +9,6 @@ void thread_function(int nr)
         std::cout<<"Printing from thread "<<nr<<std::endl;
     }
 
-    std::cout<<"Done"<<std::endl;
 }
 
 int main() {
@@ -28,5 +27,6 @@ int main() {
        t[i].join();
     }
 
+    std::cout<<"\nDone - after all threads finished"<<std::endl;
     return 0;
 }
