@@ -1,31 +1,34 @@
 #include <iostream>
 #include <thread>
-#include <mutex>
 
-static std::mutex barrier;
-int account = 100;
-int operations = 10;
 
-void adder()
+int operations = 1000;
+
+void adder(int & acc)
 {
     for(int i = 0; i < operations; i++)
-    account += 100;
+    {
+        acc += 10;
+    }
 }
 
-void subtractor()
+void subtractor(int & acc)
 {
     for(int i = 0; i < operations; i++)
-    account -= 10;
+    {
+        acc -= 10;
+    }
 }
 
 int main() {
 
     constexpr int num = 2;
+    int account = 100;
 
     std::thread t[num];
 
-    t[0] = std::thread(adder);
-    t[1] = std::thread(subtractor);
+    t[0] = std::thread(adder, std::ref(account));
+    t[1] = std::thread(subtractor, std::ref(account));
 
     t[0].join();
     t[1].join();
